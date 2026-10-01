@@ -2,31 +2,11 @@ import { asyncHandler } from "@/utils/asyncHandler";
 import { prisma } from "@/utils/prisma";
 import crypto from 'crypto'
 import bcrypt from "bcryptjs";
-import type { Response } from "express";
-import { ACCESS_TOKEN, hashToken, REFRESH_TOKEN } from "@/utils/tokens";
-import { apiResponse } from "@/utils/apiResponse";
-import { accessCookieOptions, issueSession, refreshCookieOptions } from "@/utils/cookie";
+import { hashToken } from "@/utils/tokens";
+import { issueSession } from "@/utils/cookie";
+import { sendSession } from "src/utils/sendSession";
 
 const BCRYPT_ROUNDS = 12;
-
-function sendSession(
-  res: Response,
-  credentials: { email: string; password: string },
-  tokens: { accessToken: string; refreshToken: string },
-  statusCode = 200
-) {
-  return res
-    .status(statusCode)
-    .cookie(ACCESS_TOKEN, tokens.accessToken, accessCookieOptions())
-    .cookie(REFRESH_TOKEN, tokens.refreshToken, refreshCookieOptions())
-    .json(
-      apiResponse(
-        statusCode,
-        { credentials, accessToken: tokens.accessToken },
-        statusCode === 201 ? "Account created successfully." : "Signed in successfully."
-      )
-    );
-}
 
 export const registerUser = asyncHandler(async (_, res) => {
   const result = await prisma().$transaction(async (tx) => {
@@ -73,8 +53,8 @@ export const registerUser = asyncHandler(async (_, res) => {
 
   return sendSession(
     res,
-    result.credentials,
     result.tokens,
+    result.credentials,
     201,
   );
 })
