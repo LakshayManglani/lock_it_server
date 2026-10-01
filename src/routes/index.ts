@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { createAuthV1Router } from "@/routes/auth.routes";
+import { createAuthV1Router } from "./auth.routes";
+import { createUserV1Router } from "./user.routes";
 
 /**
  * @description Mounts the versioned API. New versions get their own branch here
@@ -17,6 +18,7 @@ function createV1Router() {
   const router = Router();
 
   router.use("/auth", createAuthV1Router());
+  router.use("/user", createUserV1Router());
 
   return router;
 }
