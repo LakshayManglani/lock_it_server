@@ -1,0 +1,20 @@
+{
+  "name": "lockit_server",
+  "version": "1.0.0",
+  "description": "Server for the LockIt project",
+  "type": "module",
+  "main": "",
+  "scripts": {},
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LakshayManglani/lockit_server.git"
+  },
+  "author": "Lakshay Manglani",
+  "license": "MIT",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  }
+}
