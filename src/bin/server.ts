@@ -1,6 +1,7 @@
 import env from "@/config/env.config";
 import { startApp } from "@/app";
 import { Express } from "express";
+import dbClient from "@/db";
 
 /**
  * @description Start the server.
@@ -8,6 +9,7 @@ import { Express } from "express";
 async function startServer(): Promise<Express> {
   try {
     // Add other services
+    await dbClient.connect();
 
     return startApp();
   } catch (error) {
@@ -29,7 +31,9 @@ function shutdown() {
     console.log(`\nReceived ${signal}, closing HTTP server...`);
 
     try {
-      await Promise.all([]);
+      await Promise.all([
+        dbClient.disconnect(),
+      ]);
 
       console.log("\nAll services disconnected.");
     } catch (error) {

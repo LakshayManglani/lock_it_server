@@ -17,6 +17,8 @@ const env = cleanEnv(process.env, {
   }),
   PORT: port({ default: 8000 }),
 
+  DATABASE_URL: str(),
+
   CORS_ORIGIN: cors(),
 });
 
