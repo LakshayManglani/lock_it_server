@@ -6,7 +6,7 @@ import { ApiError } from "@/utils/apiError";
 const ACCESS_TOKEN = "accessToken";
 const REFRESH_TOKEN = "refreshToken";
 
-type TokenPayload = JwtPayload & { userId: string };
+type TokenPayload = JwtPayload & { userId: string, jti?: string };
 
 const ACCESS_SECRET = env.ACCESS_TOKEN_SECRET;
 const REFRESH_SECRET = env.REFRESH_TOKEN_SECRET;
