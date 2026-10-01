@@ -1,0 +1,50 @@
+{
+  "include": [
+    "src",
+    "test"
+  ],
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig to read more about this file */
+    /* Language and Environment */
+    "target": "es2024",
+    "moduleDetection": "force",
+    /* Modules */
+    "module": "esnext",
+    "rootDir": "src",
+    "moduleResolution": "bundler",
+    "paths": {
+      "*": [
+        "./*"
+      ],
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "rewriteRelativeImportExtensions": true,
+    "resolveJsonModule": true,
+    /* Emit */
+    "sourceMap": true,
+    "outDir": "dist",
+    "removeComments": true,
+    /* Interop Constraints */
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    /* Type Checking */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    /* Completeness */
+    "skipLibCheck": true
+  },
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "rewriteExtensions": true,
+    "verbose": false
+  }
+}
