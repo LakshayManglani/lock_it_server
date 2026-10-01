@@ -41,5 +41,9 @@
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.0"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.5",
+    "envalid": "^8.2.0"
   }
 }
