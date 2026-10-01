@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { registerUser } from "@/controllers/auth/registerUser.controller";
-import { loginUser } from "@/controllers/auth/loginUser.controller";
-import { validate } from "@/validators";
-import { loginUserValidator } from "@/validators/auth/loginUser.validator";
+import { registerUser } from "@/modules/auth/controllers/registerUser.controller";
+import { loginUser } from "@/modules/auth/controllers/loginUser.controller";
+import { validate } from "@/utils/validate";
+import { loginUserValidator } from "@/modules/auth/validators/loginUser.validator";
 
 function createAuthV1Router(): Router {
   const router = Router();
