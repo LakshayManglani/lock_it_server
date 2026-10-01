@@ -27,4 +27,30 @@ model User {
   // SHA-256 hashes of the user's live refresh tokens. Hashing them means a leaked
   // database row cannot be replayed as a session. Rotate on refresh, drop on logout.
   refreshTokens String[] @default([])
+
+  listings Listing[]
+}
+
+model Listing {
+  id          String  @id @default(uuid()) @db.Uuid
+  title       String
+  description String
+  price       Decimal @db.Decimal(10, 2)
+
+  location  String
+  latitude  Decimal? @db.Decimal(9, 6)
+  longitude Decimal? @db.Decimal(9, 6)
+
+  guests    Int
+  bedrooms  Int
+  beds      Int
+  bathrooms Int
+
+  images String[] @default([])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  hostId String @db.Uuid
+  host   User   @relation(fields: [hostId], references: [id], onDelete: Cascade)
 }

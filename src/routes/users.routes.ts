@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getCurrentUser } from "@/modules/user/controllers/getCurrentUser.controller";
+import { getCurrentUser } from "@/modules/users/controllers/getCurrentUser.controller";
 import { requireAuth } from "@/middlewares/auth.middleware";
 
 function createUserV1Router(): Router {
