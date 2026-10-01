@@ -1,4 +1,3 @@
-import log from "@/log";
+import log from '@/log';
 
-log('Hello World')
-
+log('Hello World');
