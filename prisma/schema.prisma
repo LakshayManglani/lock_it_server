@@ -9,3 +9,22 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum Role {
+  USER
+  HOST
+}
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         Role     @default(USER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // SHA-256 hashes of the user's live refresh tokens. Hashing them means a leaked
+  // database row cannot be replayed as a session. Rotate on refresh, drop on logout.
+  refreshTokens String[] @default([])
+}

@@ -4,6 +4,7 @@ import helmet from "helmet";
 import cors from "cors";
 import env from "@/config/env.config";
 import { errorHandler, notFoundHandler } from "@/middlewares/error.middlewares";
+import { createRouter } from "@/routes";
 
 function startApp(): Express {
   const app = express();
@@ -38,6 +39,8 @@ function startApp(): Express {
   app.get("/health", (_, res) => {
     return res.status(200).json({ message: 'Hello World' });
   });
+
+  app.use("/api", createRouter());
 
   // notFoundHandler
   app.use(notFoundHandler);
