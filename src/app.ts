@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import cors from "cors";
 import env from "@/config/env.config";
-import { errorHandler, notFoundHandler } from "@/middlewares/error.middlewares";
+import { errorHandler, notFoundHandler } from "@/middlewares/error.middleware";
 import { createRouter } from "@/routes";
 
 function startApp(): Express {
