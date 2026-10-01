@@ -1,8 +1,13 @@
 import { configDotenv } from "dotenv";
-import { cleanEnv, port, str } from "envalid";
+import { cleanEnv, port, str, makeValidator } from "envalid";
 
 configDotenv({
   path: "./.env",
+});
+
+const cors = makeValidator((value) => {
+  if (!value) return "*";
+  return value.split(",");
 });
 
 const env = cleanEnv(process.env, {
@@ -11,6 +16,8 @@ const env = cleanEnv(process.env, {
     default: "production",
   }),
   PORT: port({ default: 8000 }),
+
+  CORS_ORIGIN: cors(),
 });
 
 export default env;
