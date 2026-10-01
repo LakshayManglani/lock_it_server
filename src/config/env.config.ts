@@ -15,6 +15,10 @@ const env = cleanEnv(process.env, {
     choices: ["production"],
     default: "production",
   }),
+  APP_ENV: str({
+    choices: ["development", "production"],
+    default: "production",
+  }),
   PORT: port({ default: 8000 }),
 
   DATABASE_URL: str(),

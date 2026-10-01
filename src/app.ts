@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import cors from "cors";
 import env from "@/config/env.config";
+import { errorHandler, notFoundHandler } from "@/middlewares/error.middlewares";
 
 function startApp(): Express {
   const app = express();
@@ -37,6 +38,12 @@ function startApp(): Express {
   app.get("/health", (_, res) => {
     return res.status(200).json({ message: 'Hello World' });
   });
+
+  // notFoundHandler
+  app.use(notFoundHandler);
+
+  // errorHandler
+  app.use(errorHandler);
 
   return app;
 }
