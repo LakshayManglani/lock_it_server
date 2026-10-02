@@ -3,6 +3,7 @@ import { asyncHandler } from "@/utils/asyncHandler";
 import { prisma } from "@/utils/prisma";
 import { apiResponse } from "@/utils/apiResponse";
 import { ApiError } from "@/utils/apiError";
+import { deleteImage } from "@/utils/cloudinary";
 
 export const deleteListing = asyncHandler(
   async (req: Request, res: Response) => {
@@ -28,9 +29,16 @@ export const deleteListing = asyncHandler(
       );
     }
 
+    const images = await prisma().image.findMany({
+      where: { listingId: id },
+      select: { publicId: true },
+    });
+
     await prisma().listing.delete({
       where: { id },
     });
+
+    await Promise.allSettled(images.map(({ publicId }) => deleteImage(publicId)));
 
     return res.status(200).json(
       apiResponse(

@@ -41,7 +41,6 @@ export const updateListing = asyncHandler(
       bedrooms,
       beds,
       bathrooms,
-      images,
     } = req.body;
 
     const updatedListing = await prisma().listing.update({
@@ -59,7 +58,6 @@ export const updateListing = asyncHandler(
         bedrooms,
         beds,
         bathrooms,
-        images,
       },
       select: {
         id: true,
@@ -73,7 +71,15 @@ export const updateListing = asyncHandler(
         bedrooms: true,
         beds: true,
         bathrooms: true,
-        images: true,
+        images: {
+          orderBy: { createdAt: "asc" },
+          select: {
+            id: true,
+            url: true,
+            publicId: true,
+            createdAt: true,
+          },
+        },
         createdAt: true,
         updatedAt: true,
         host: {

@@ -28,7 +28,15 @@ export const getListingById = asyncHandler(
         bedrooms: true,
         beds: true,
         bathrooms: true,
-        images: true,
+        images: {
+          orderBy: { createdAt: "asc" },
+          select: {
+            id: true,
+            url: true,
+            publicId: true,
+            createdAt: true,
+          },
+        },
         createdAt: true,
         updatedAt: true,
         host: {

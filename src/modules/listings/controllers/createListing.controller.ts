@@ -25,7 +25,6 @@ export const createListing = asyncHandler(
       bedrooms,
       beds,
       bathrooms,
-      images,
     } = req.body;
 
     const listing = await prisma().listing.create({
@@ -40,7 +39,6 @@ export const createListing = asyncHandler(
         bedrooms,
         beds,
         bathrooms,
-        images,
         hostId: user.id,
       },
       select: {
@@ -55,7 +53,15 @@ export const createListing = asyncHandler(
         bedrooms: true,
         beds: true,
         bathrooms: true,
-        images: true,
+        images: {
+          orderBy: { createdAt: "asc" },
+          select: {
+            id: true,
+            url: true,
+            publicId: true,
+            createdAt: true,
+          },
+        },
         createdAt: true,
         updatedAt: true,
       },

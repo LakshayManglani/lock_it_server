@@ -53,17 +53,4 @@ export const updateListingValidator = [
     .optional()
     .isInt({ min: 1 })
     .withMessage("Bathrooms must be at least 1."),
-
-  body("images")
-    .optional()
-    .isArray()
-    .withMessage("Images must be an array."),
-
-  body("images.*")
-    .optional()
-    .isString()
-    .withMessage("Each image must be a string.")
-    .trim()
-    .notEmpty()
-    .withMessage("Image URL cannot be empty."),
 ];
