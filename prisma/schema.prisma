@@ -29,6 +29,7 @@ model User {
   refreshTokens String[] @default([])
 
   listings Listing[]
+  bookings Booking[]
 }
 
 model Listing {
@@ -52,7 +53,8 @@ model Listing {
   hostId String @db.Uuid
   host   User   @relation(fields: [hostId], references: [id], onDelete: Cascade)
 
-  images Image[]
+  images   Image[]
+  bookings Booking[]
 }
 
 model Image {
@@ -65,4 +67,26 @@ model Image {
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 
   @@index([listingId])
+}
+
+model Booking {
+  id String @id @default(uuid()) @db.Uuid
+
+  checkIn  DateTime
+  checkOut DateTime
+  guests   Int
+
+  totalPrice Decimal @db.Decimal(10, 2)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId    String @db.Uuid
+  listingId String @db.Uuid
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@index([listingId])
+  @@index([userId])
 }

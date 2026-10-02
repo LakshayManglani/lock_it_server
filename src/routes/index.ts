@@ -2,6 +2,7 @@ import { Router } from "express";
 import { createAuthV1Router } from "./auth.routes";
 import { createUserV1Router } from "./users.routes";
 import { createListingsV1Router } from "./listings.routes";
+import { createBookingsV1Router } from "./bookings.routes";
 
 /**
  * @description Mounts the versioned API. New versions get their own branch here
@@ -21,6 +22,7 @@ function createV1Router() {
   router.use("/auth", createAuthV1Router());
   router.use("/users", createUserV1Router());
   router.use("/listings", createListingsV1Router());
+  router.use("/bookings", createBookingsV1Router());
 
   return router;
 }
