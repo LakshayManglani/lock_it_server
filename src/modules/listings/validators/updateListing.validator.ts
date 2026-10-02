@@ -1,0 +1,69 @@
+import { body } from "express-validator";
+
+export const updateListingValidator = [
+  body("title")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("Title cannot be empty."),
+
+  body("description")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("Description cannot be empty."),
+
+  body("price")
+    .optional()
+    .isFloat({ min: 0 })
+    .withMessage("Price must be a positive number."),
+
+  body("location")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("Location cannot be empty."),
+
+  body("latitude")
+    .optional()
+    .isFloat({ min: -90, max: 90 })
+    .withMessage("Latitude must be between -90 and 90."),
+
+  body("longitude")
+    .optional()
+    .isFloat({ min: -180, max: 180 })
+    .withMessage("Longitude must be between -180 and 180."),
+
+  body("guests")
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage("Guests must be at least 1."),
+
+  body("bedrooms")
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage("Bedrooms cannot be negative."),
+
+  body("beds")
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage("Beds must be at least 1."),
+
+  body("bathrooms")
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage("Bathrooms must be at least 1."),
+
+  body("images")
+    .optional()
+    .isArray()
+    .withMessage("Images must be an array."),
+
+  body("images.*")
+    .optional()
+    .isString()
+    .withMessage("Each image must be a string.")
+    .trim()
+    .notEmpty()
+    .withMessage("Image URL cannot be empty."),
+];

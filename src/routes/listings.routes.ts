@@ -4,13 +4,15 @@ import { getListingById } from "@/modules/listings/controllers/getListingById.co
 import { createListingValidator } from "@/modules/listings/validators/createListing.validator";
 import { createListing } from "@/modules/listings/controllers/createListing.controller";
 import { validate } from "@/utils/validate";
-import { requireAuth } from "src/middlewares/auth.middleware";
+import { requireAuth } from "@/middlewares/auth.middleware";
+import { updateListingValidator } from "@/modules/listings/validators/updateListing.validator";
+import { updateListing } from "@/modules/listings/controllers/updateListing.controller";
 
 export function createListingsV1Router(): Router {
   const router = Router();
 
   router.route("/").get(getListings).post(requireAuth, validate(createListingValidator), createListing);
-  router.route("/:id").get(getListingById);
+  router.route("/:id").get(getListingById).patch(requireAuth, validate(updateListingValidator), updateListing);
 
   return router;
 }
