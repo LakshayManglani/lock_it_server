@@ -34,10 +34,15 @@ const env = cleanEnv(process.env, {
 
   DATABASE_URL: str(),
 
+  // JWT settings, generate with: openssl rand -hex 32
   ACCESS_TOKEN_SECRET: secret(),
   ACCESS_TOKEN_EXPIRES: num({ default: 60 * 60 * 24 }),
   REFRESH_TOKEN_SECRET: secret(),
   REFRESH_TOKEN_EXPIRES: num({ default: 60 * 60 * 24 * 30 }),
+
+  CLOUDINARY_CLOUD_NAME: str({ default: "" }),
+  CLOUDINARY_API_KEY: str({ default: "" }),
+  CLOUDINARY_API_SECRET: str({ default: "" }),
 
   CORS_ORIGIN: cors(),
 });
