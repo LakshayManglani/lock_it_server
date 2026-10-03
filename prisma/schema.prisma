@@ -30,6 +30,7 @@ model User {
 
   listings Listing[]
   bookings Booking[]
+  reviews  Review[]
 }
 
 model Listing {
@@ -55,6 +56,7 @@ model Listing {
 
   images   Image[]
   bookings Booking[]
+  reviews  Review[]
 }
 
 model Image {
@@ -86,6 +88,28 @@ model Booking {
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  review Review?
+
+  @@index([listingId])
+  @@index([userId])
+}
+
+model Review {
+  id      String  @id @default(uuid()) @db.Uuid
+  rating  Int
+  comment String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId    String @db.Uuid
+  listingId String @db.Uuid
+  bookingId String @unique @db.Uuid
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 
   @@index([listingId])
   @@index([userId])
