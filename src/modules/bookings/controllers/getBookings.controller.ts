@@ -32,6 +32,9 @@ export const getBookings = asyncHandler(
             },
           },
         },
+        review: {
+          select: { id: true },
+        },
       },
     });
 

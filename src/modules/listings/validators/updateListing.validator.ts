@@ -16,7 +16,8 @@ export const updateListingValidator = [
   body("price")
     .optional()
     .isFloat({ min: 0 })
-    .withMessage("Price must be a positive number."),
+    .withMessage("Price must be a positive number.")
+    .toFloat(),
 
   body("location")
     .optional()
@@ -27,30 +28,36 @@ export const updateListingValidator = [
   body("latitude")
     .optional()
     .isFloat({ min: -90, max: 90 })
-    .withMessage("Latitude must be between -90 and 90."),
+    .withMessage("Latitude must be between -90 and 90.")
+    .toFloat(),
 
   body("longitude")
     .optional()
     .isFloat({ min: -180, max: 180 })
-    .withMessage("Longitude must be between -180 and 180."),
+    .withMessage("Longitude must be between -180 and 180.")
+    .toFloat(),
 
   body("guests")
     .optional()
     .isInt({ min: 1 })
-    .withMessage("Guests must be at least 1."),
+    .withMessage("Guests must be at least 1.")
+    .toInt(),
 
   body("bedrooms")
     .optional()
     .isInt({ min: 0 })
-    .withMessage("Bedrooms cannot be negative."),
+    .withMessage("Bedrooms cannot be negative.")
+    .toInt(),
 
   body("beds")
     .optional()
     .isInt({ min: 1 })
-    .withMessage("Beds must be at least 1."),
+    .withMessage("Beds must be at least 1.")
+    .toInt(),
 
   body("bathrooms")
     .optional()
     .isInt({ min: 1 })
-    .withMessage("Bathrooms must be at least 1."),
+    .withMessage("Bathrooms must be at least 1.")
+    .toInt(),
 ];
